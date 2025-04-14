@@ -1,0 +1,82 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+      "prefix": {
+        "value": "tshop"
+      },
+      "environment": {
+        "value": "dev"
+      },
+      "location": {
+        "value": "eastus"
+      },
+      "clusterName": {
+        "value": "aks-tshop-cluster"
+      },
+      "dnsPrefix": {
+        "value": "aks-tshop"
+      },
+      "osDiskSizeGB": {
+        "value": 30
+      },
+      "agentCount": {
+        "value": 2
+      },
+      "agentVMSize": {
+        "value": "Standard_B2s"
+      },
+      "linuxAdminUsername": {
+        "value": "azureuser"
+      },
+      "sshRSAPublicKey": {
+        "reference": {
+          "keyVault": {
+            "id": "/subscriptions/{subscription-id}/resourceGroups/{rg-name}/providers/Microsoft.KeyVault/vaults/{vault-name}"
+          },
+          "secretName": "sshPublicKey"
+        }
+      },
+      "acrName": {
+        "value": "tshopacr${uniqueString(resourceGroup().id)}"
+      },
+      "appGatewayName": {
+        "value": "tshop-app-gateway"
+      },
+      "appGatewayTier": {
+        "value": "Standard_v2"
+      },
+      "appGatewayCapacity": {
+        "value": 1
+      },
+      "appServicePlanName": {
+        "value": "tshop-asp"
+      },
+      "appServicePlanSku": {
+        "value": "P1v2"
+      },
+      "webAppName": {
+        "value": "tshop-webapp${uniqueString(resourceGroup().id)}"
+      },
+      "containerImage": {
+        "value": "tshop-service:latest"
+      },
+      "aksServicePrincipalClientId": {
+        "reference": {
+          "keyVault": {
+            "id": "/subscriptions/{subscription-id}/resourceGroups/{rg-name}/providers/Microsoft.KeyVault/vaults/{vault-name}"
+          },
+          "secretName": "aksSpClientId"
+        }
+      },
+      "vnetAddressPrefix": {
+        "value": "10.0.0.0/16"
+      },
+      "publicSubnetAddressPrefix": {
+        "value": "10.0.1.0/24"
+      },
+      "privateSubnetAddressPrefix": {
+        "value": "10.0.2.0/24"
+      }
+    }
+  }

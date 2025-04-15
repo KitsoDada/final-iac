@@ -1,33 +1,26 @@
-name: Deploy T-shop Infrastructure
+name: Deploy Infrastructure
 
 on:
   push:
     branches:
       - main
-    paths:
-      - "Users/ZiboMatiwaza/final Devops/T-shop-iac/**"
-
-env:
-  RESOURCE_GROUP: Ecommerce-RG
-  LOCATION: southafricanorth
 
 jobs:
-  deploy-infra:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - name: Checkout repo
+        uses: actions/checkout@v3
 
-      - name: Azure Login
+      - name: Log in to Azure
         uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - name: Deploy Bicep Template
+      - name: Deploy Bicep Template to Ecommerce-RG
         run: |
           az deployment group create \
-            --resource-group "${{ env.RESOURCE_GROUP }}" \
-            --template-file "Users/ZiboMatiwaza/final Devops/T-shop-iac/main.bicep" \
-            --parameters "Users/ZiboMatiwaza/final Devops/T-shop-iac/parameters.json" \
-            --name tshop-deployment-${{ github.run_number }}
+            --resource-group Ecommerce-RG \
+            --template-file "./Users/ZiboMatiwaza/final Devops/T-shop-iac/main.bicep" \
+            --parameters "@./Users/ZiboMatiwaza/final Devops/T-shop-iac/parameters.json"

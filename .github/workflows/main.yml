@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - "infra/**"
+      - "Users/ZiboMatiwaza/final Devops/T-shop-iac/**"
 
 env:
   RESOURCE_GROUP: Ecommerce-RG
@@ -13,7 +13,6 @@ env:
 
 jobs:
   deploy-infra:
-    name: Deploy Infra to Azure
     runs-on: ubuntu-latest
 
     steps:
@@ -28,7 +27,7 @@ jobs:
       - name: Deploy Bicep Template
         run: |
           az deployment group create \
-            --resource-group ${{ env.RESOURCE_GROUP }} \
-            --template-file infra/main.bicep \
-            --parameters infra/parameters.json \
+            --resource-group "${{ env.RESOURCE_GROUP }}" \
+            --template-file "Users/ZiboMatiwaza/final Devops/T-shop-iac/main.bicep" \
+            --parameters "Users/ZiboMatiwaza/final Devops/T-shop-iac/parameters.json" \
             --name tshop-deployment-${{ github.run_number }}

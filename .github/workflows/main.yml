@@ -3,7 +3,7 @@ on: [push]
 
 jobs:
   test:
-    runs-on: [ubuntu-latest] # Specify the label of your self-hosted runner here
+    runs-on: [self-hosted] # Specify the label of your self-hosted runner here
     steps:
     - name: Azure login
       uses: azure/login@v2
